@@ -19,6 +19,11 @@
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
 	</filter>
 	
+	<!-- 添加session属性监听器，同步session中的用户信息 -->
+	<listener>
+		<listener-class>com.hp.listener.UserHttpSessionAttributeListener</listener-class>
+	</listener>
+	
 	<!-- openSessionInView配置 -->
 	<filter>
 		<filter-name>openSessionInView</filter-name>

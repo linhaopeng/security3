@@ -7,6 +7,7 @@
 <title>首页</title>
 </head> 
 <a href="j_spring_security_logout">注销</a>
+${account.name }
 <img alt="spring-security实现的框架图" src="spring-security_frameworkPic.png">
 </html>
 
