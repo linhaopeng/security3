@@ -12,6 +12,9 @@
 			user-service-ref="accountService" : 配置启动数据库方式获取用户和角色，xml失效
 		 -->
 		<security:authentication-provider user-service-ref="accountService">
+			<!-- 密码采用md5加密 -->
+			<security:password-encoder hash="md5">
+			</security:password-encoder>
 			<!-- 采用xml的方式 
 			<security:user-service>
 				<security:user name="user" password="user" authorities="ROLE_USER" />
