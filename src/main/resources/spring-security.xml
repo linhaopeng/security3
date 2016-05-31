@@ -11,19 +11,28 @@
 		<!-- 配置账号密码所属的角色  角色以 ROLE_开头，为spring获取名称的标识 (xml方式的才需要)
 			user-service-ref="accountService" : 配置启动数据库方式获取用户和角色，xml失效
 		 -->
-		<security:authentication-provider user-service-ref="accountService">
-			<!-- 密码采用md5加密 -->
-			<security:password-encoder hash="md5">
-			</security:password-encoder>
-			<!-- 采用xml的方式 
-			<security:user-service>
-				<security:user name="user" password="user" authorities="ROLE_USER" />
-				<security:user name="admin" password="admin" authorities="ROLE_ADMIN" />
-			</security:user-service>
-			 -->
+		<security:authentication-provider user-service-ref="cachingUserDetailsService">
+			<!-- 密码采用md5加密  -->
+			<security:password-encoder hash="md5" />
 		</security:authentication-provider>
 	</security:authentication-manager>
 	
+	
+	<bean id="cachingUserDetailsService" class="org.springframework.security.config.authentication.CachingUserDetailsService">
+	    <!-- 真正加载UserDetails的UserDetailsService -->
+	    <constructor-arg ref="accountService"/>
+	    <!-- 缓存UserDetails的UserCache -->
+	    <property name="userCache">
+		    <bean class="org.springframework.security.core.userdetails.cache.EhCacheBasedUserCache">
+		       <!-- 用于真正缓存的Ehcache对象 -->
+		       <property name="cache" ref="ehcache4UserDetails"/>
+		    </bean>
+	    </property>
+   	</bean>
+	
+	<!-- 将使用默认的CacheManager创建一个名为ehcache4UserDetails的Ehcache对象 -->
+    <bean id="ehcache4UserDetails" class="org.springframework.cache.ehcache.EhCacheFactoryBean"/>
+
 	<!--
 		auto-config="true"  	: 自动生成登录页面
 		pattern="/admin/**" 	: 为配置的路径,**表示支持子目录

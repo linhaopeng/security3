@@ -121,6 +121,19 @@
             <version>3.2.5.RELEASE</version>  
         </dependency>  
         
+        <!-- ehcache需要的依赖 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>3.2.5.RELEASE</version>
+		</dependency>
+		<!-- 加入ehcache -->
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache</artifactId>
+			<version>2.7.4</version>
+		</dependency>
+        
         <!-- 加入hibernate依赖包 -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
