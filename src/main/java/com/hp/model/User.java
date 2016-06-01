@@ -25,10 +25,10 @@ import org.springframework.security.core.userdetails.UserDetails;
  *
  */
 @Entity
-@Table(name = "account", schema = "")
+@Table(name = "sys_user", schema = "")
 @DynamicInsert(true)
 @DynamicUpdate(true)
-public class Account extends BaseModel implements UserDetails {
+public class User extends BaseModel implements UserDetails {
 
 	/**
 	 * 
@@ -75,7 +75,7 @@ public class Account extends BaseModel implements UserDetails {
 	}
 
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "account_role", schema = "", joinColumns = { @JoinColumn(name = "aid", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "rid", nullable = false, updatable = false) })
+	@JoinTable(name = "sys_user_role", schema = "", joinColumns = { @JoinColumn(name = "aid", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "rid", nullable = false, updatable = false) })
 	public Set<Role> getRoles() {
 		return roles;
 	}

@@ -24,7 +24,7 @@ import org.springframework.security.core.GrantedAuthority;
  *
  */
 @Entity
-@Table(name = "role", schema = "")
+@Table(name = "sys_role", schema = "")
 @DynamicInsert(true)
 @DynamicUpdate(true)
 public class Role extends BaseModel implements GrantedAuthority, ConfigAttribute {
@@ -35,7 +35,7 @@ public class Role extends BaseModel implements GrantedAuthority, ConfigAttribute
 	private static final long serialVersionUID = -638143376103147253L;
 	private String name;
 	private String detail;
-	private Set<Account> accounts = new HashSet<Account>(0);
+	private Set<User> accounts = new HashSet<User>(0);
 
 	private String authority;
 	private String attribute;
@@ -59,12 +59,12 @@ public class Role extends BaseModel implements GrantedAuthority, ConfigAttribute
 	}
 
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "account_role", schema = "", joinColumns = { @JoinColumn(name = "rid", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "aid", nullable = false, updatable = false) })
-	public Set<Account> getAccounts() {
+	@JoinTable(name = "sys_user_role", schema = "", joinColumns = { @JoinColumn(name = "rid", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "aid", nullable = false, updatable = false) })
+	public Set<User> getAccounts() {
 		return accounts;
 	}
 
-	public void setAccounts(Set<Account> accounts) {
+	public void setAccounts(Set<User> accounts) {
 		this.accounts = accounts;
 	}
 

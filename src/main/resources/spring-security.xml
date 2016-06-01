@@ -9,7 +9,7 @@
 	<!-- 认证管理器,配置了管理员与角色的关系  -->
 	<security:authentication-manager alias="authenticationManager">
 		<!-- 配置账号密码所属的角色  角色以 ROLE_开头，为spring获取名称的标识 (xml方式的才需要)
-			user-service-ref="accountService" : 配置启动数据库方式获取用户和角色，xml失效
+			user-service-ref="userService" : 配置启动数据库方式获取用户和角色，xml失效
 		 -->
 		<security:authentication-provider user-service-ref="cachingUserDetailsService">
 			<!-- 密码采用md5加密  -->
@@ -20,7 +20,7 @@
 	
 	<bean id="cachingUserDetailsService" class="org.springframework.security.config.authentication.CachingUserDetailsService">
 	    <!-- 真正加载UserDetails的UserDetailsService -->
-	    <constructor-arg ref="accountService"/>
+	    <constructor-arg ref="userService"/>
 	    <!-- 缓存UserDetails的UserCache -->
 	    <property name="userCache">
 		    <bean class="org.springframework.security.core.userdetails.cache.EhCacheBasedUserCache">

@@ -16,7 +16,7 @@ import org.hibernate.annotations.DynamicUpdate;
  *
  */
 @Entity
-@Table(name = "url", schema = "")
+@Table(name = "sys_url", schema = "")
 @DynamicInsert(true)
 @DynamicUpdate(true)
 public class Url extends BaseModel {

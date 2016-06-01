@@ -9,12 +9,12 @@ import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 
 import com.hp.base.BaseAction;
-import com.hp.model.Account;
+import com.hp.model.User;
 
 @ParentPackage("basePackage")
 @Namespace("/account")
 @Action(value = "accountAction")
-public class AccountAction extends BaseAction<Account>{
+public class AccountAction extends BaseAction<User>{
 	
 	private static final long serialVersionUID = -3131702037102065793L;
 

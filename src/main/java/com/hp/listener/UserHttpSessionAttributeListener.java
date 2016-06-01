@@ -8,7 +8,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import com.hp.model.Account;
+import com.hp.model.User;
 import com.hp.utils.ConfigUtil;
 
 public class UserHttpSessionAttributeListener implements HttpSessionAttributeListener {
@@ -27,7 +27,7 @@ public class UserHttpSessionAttributeListener implements HttpSessionAttributeLis
 		// 当前session中有新的属性时触发 SPRING_SECURITY_CONTEXT 是spring存放的key
 		if (event.getName().equals(springSecurityContext)) {
 			context = SecurityContextHolder.getContext();
-			Account account = (Account) context.getAuthentication().getPrincipal();
+			User account = (User) context.getAuthentication().getPrincipal();
 			event.getSession().setAttribute(ConfigUtil.getSessionInfoName(), account);
 		}
 	}
@@ -45,7 +45,7 @@ public class UserHttpSessionAttributeListener implements HttpSessionAttributeLis
 		if (event.getName().equals(springSecurityContext)) {
 			// System.out.println("----session中更新登陆信息------");
 			context = SecurityContextHolder.getContext();
-			Account account = (Account) context.getAuthentication().getPrincipal();
+			User account = (User) context.getAuthentication().getPrincipal();
 			event.getSession().setAttribute(ConfigUtil.getSessionInfoName(), account);
 		}
 	}

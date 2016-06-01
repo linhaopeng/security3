@@ -7,8 +7,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.hp.dao.AccountDao;
-import com.hp.service.AccountService;
+import com.hp.dao.UserDao;
+import com.hp.service.UserService;
 
 /**
  * 登录操作，需要实现UserDetailsService接口
@@ -16,16 +16,16 @@ import com.hp.service.AccountService;
  * @author baojulin
  *
  */
-@Service("accountService")
-public class AccountServiceImpl implements AccountService, UserDetailsService {
+@Service("userService")
+public class UserServiceImpl implements UserService, UserDetailsService {
 	@Resource
-	private AccountDao accountDao;
+	private UserDao userDao;
 
 	/**
 	 * 登录的时候，将用户信息存储到Account中
 	 */
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		return accountDao.getJoinRole(username);
+		return userDao.getJoinRole(username);
 	}
 }

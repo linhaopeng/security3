@@ -19,7 +19,7 @@ import org.hibernate.annotations.DynamicUpdate;
  *
  */
 @Entity
-@Table(name = "privilege", schema = "")
+@Table(name = "sys_privilege", schema = "")
 @DynamicInsert(true)
 @DynamicUpdate(true)
 public class Privilege extends BaseModel {
@@ -37,7 +37,7 @@ public class Privilege extends BaseModel {
 	}
 
 	@ManyToMany
-	@JoinTable(name = "privilege_role", schema = "", joinColumns = { @JoinColumn(name = "pid", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "rid", nullable = false, updatable = false) })
+	@JoinTable(name = "sys_role_privilege", schema = "", joinColumns = { @JoinColumn(name = "pid", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "rid", nullable = false, updatable = false) })
 	public Set<Role> getRoles() {
 		return roles;
 	}
