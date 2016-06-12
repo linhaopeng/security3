@@ -15,10 +15,10 @@ import com.hp.model.User;
  * @author baojulin
  *
  */
-@Component("userDao")
+//@Component("userDao")
 public class UserDaoImpl implements UserDao {
 
-	@Resource
+//	@Resource
 	private SessionFactory sessionFactory;
 
 	/**

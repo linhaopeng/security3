@@ -1,6 +1,7 @@
 package com.hp.model;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -34,9 +35,15 @@ public class User extends BaseModel implements UserDetails {
 	 * 
 	 */
 	private static final long serialVersionUID = -4414050582422802953L;
-	private String login;
+	private String login; // 不允许为null
 	private String pass;
 	private String name;
+	private Date createdatetime;
+	private Date updatedatetime;
+	private String sex;
+	private Integer age;
+	private String photo;
+
 	private Set<Role> roles = new HashSet<Role>(0);
 
 	private Collection<? extends GrantedAuthority> authorities;
@@ -146,7 +153,51 @@ public class User extends BaseModel implements UserDetails {
 	public boolean isEnabled() {
 		return true;
 	}
+	
+	@Column(name = "createdatetime", length = 100)
+	public Date getCreatedatetime() {
+		return createdatetime;
+	}
 
+	public void setCreatedatetime(Date createdatetime) {
+		this.createdatetime = createdatetime;
+	}
+
+	@Column(name = "updatedatetime", length = 100)
+	public Date getUpdatedatetime() {
+		return updatedatetime;
+	}
+
+	public void setUpdatedatetime(Date updatedatetime) {
+		this.updatedatetime = updatedatetime;
+	}
+
+	@Column(name = "sex", length = 2)
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+
+	@Column(name = "age", precision = 8, scale = 0)
+	public Integer getAge() {
+		return age;
+	}
+
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+
+	@Column(name = "photo", length = 100)
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
 	public void setAccountNonExpired(boolean accountNonExpired) {
 		this.accountNonExpired = accountNonExpired;
 	}

@@ -57,8 +57,8 @@ create table sys_user_role(
 	primary key(aid,rid)
 );
 /******************添加用户与角色测试数据*************************/
-INSERT INTO sys_user (login,name,pass) VALUES ('test01','张三','test01');
-INSERT INTO sys_user (login,name,pass) VALUES ('test02','李四','test02');
+INSERT INTO sys_user (login,name,pass) VALUES ('test01','张三','e10adc3949ba59abbe56e057f20f883e');
+INSERT INTO sys_user (login,name,pass) VALUES ('test02','李四','e10adc3949ba59abbe56e057f20f883e');
 INSERT INTO sys_role (name,detail) VALUES ('ADMIN','管理员账户');
 INSERT INTO sys_role (name,detail) VALUES ('USER','普通账户');
 INSERT INTO sys_user_role (aid,rid) VALUES (1,1);
