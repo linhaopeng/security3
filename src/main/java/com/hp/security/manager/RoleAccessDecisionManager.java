@@ -1,4 +1,4 @@
-package com.hp.service.impl;
+package com.hp.security.manager;
 
 import java.util.Collection;
 

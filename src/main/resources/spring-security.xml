@@ -66,7 +66,7 @@
 		<!-- 决策器 -->
 		<property name="accessDecisionManager" ref="roleAccessDecisionManager" />	 	
 		<!-- 配置urlService ，security可以通过url得到角色名称 -->
-	 	<property name="securityMetadataSource" ref="resourceService" />
+	 	<property name="securityMetadataSource" ref="securityMetadataSource" />
 	</bean>
 
 </beans>

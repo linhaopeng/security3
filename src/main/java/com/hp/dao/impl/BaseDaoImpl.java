@@ -13,10 +13,11 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.hp.dao.BaseDao;
 
-// @Transactional注解可以被继承，即对子类也有效
+@Transactional//注解可以被继承，即对子类也有效
 @SuppressWarnings("unchecked")
 @Repository("baseDao")
 @Lazy(true) //或者将BaseDaoImpl 设置成abstract

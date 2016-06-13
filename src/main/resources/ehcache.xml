@@ -28,7 +28,7 @@
 	       diskExpiryThreadIntervalSeconds="120"
 	        memoryStoreEvictionPolicy="LRU" />
 
-	<cache name="defaultCacheName"
+	<cache name="resourcetypeServiceCache"
 	 maxElementsInMemory="10000"
 	  maxElementsOnDisk="1000"
 	   eternal="false" 
