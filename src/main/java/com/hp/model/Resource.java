@@ -47,7 +47,7 @@ public class Resource extends BaseModel {
 	private Set<Role> roles = new HashSet<Role>(0);
 	private Set<Resource> resources = new HashSet<Resource>(0);
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "SYRESOURCETYPE_ID")
 	public ResourceType getResourcetype() {
 		return resourcetype;
@@ -57,7 +57,7 @@ public class Resource extends BaseModel {
 		this.resourcetype = resourcetype;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "SYSRESOURCE_ID")
 	public Resource getResource() {
 		return resource;

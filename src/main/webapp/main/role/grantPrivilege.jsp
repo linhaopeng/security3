@@ -29,7 +29,7 @@
 			text : '数据加载中....'
 		});
 		$('#tree').tree({
-			url : '${cxt}/resource/sysResourceAction!getResourceTree.action',
+			url : '${cxt}/resource/resourceAction!getResourceTree.action',
 			parentField : 'pid',
 			checkbox : true,
 			formatter : function(node) {

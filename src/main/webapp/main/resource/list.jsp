@@ -40,7 +40,7 @@
 	var removeFun = function(id) {
 		parent.$.messager.confirm('询问', '您确定要删除此记录？', function(r) {
 			if (r) {
-				$.post('${cxt}/base/syresource!delete.sy', {
+				$.post('${cxt}/resource/resourceAction!delete.action', {
 					id : id
 				}, function() {
 					grid.treegrid('reload');
@@ -72,7 +72,7 @@
 	$(function() {
 		grid = $('#grid').treegrid({
 			title : '',
-			url : '${cxt}/resource/sysResourceAction!getResourceTree.action',
+			url : '${cxt}/resource/resourceAction!getResourceTree.action',
 			idField : 'id',
 			treeField : 'name',
 			parentField : 'pid',
@@ -104,7 +104,7 @@
 				field : 'resourcetype',
 				formatter : function(value, row) {
 					// 获取关联对象的值
-					return value.name;
+					return value?value.name:"";
 				}
 			}, {
 				width : '150',

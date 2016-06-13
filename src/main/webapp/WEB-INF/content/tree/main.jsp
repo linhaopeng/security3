@@ -8,7 +8,7 @@
 		background: url("../images/logo.png") no-repeat left bottom;
 	}
 </style>
-<%@ include file="/common/common.jsp"%>
+<%@ include file="/common/common.jsp" %>
 <script type="text/javascript">
 	var mainMenu;
 	var mainTabs;
@@ -16,7 +16,7 @@
 	$(function() {
 
 		mainMenu = $('#mainMenu').tree({
-			url : '${pageContext.request.contextPath}/tree/treeAction!getTreeByUser.action',
+			url : '${pageContext.request.contextPath}/resource/resourceAction!getTreeByUser.action',
 			parentField : 'pid',
 			onClick : function(node) {
 				if (node.attributes.url) {
@@ -130,7 +130,7 @@
 </script>
 </head>
 <body id="mainLayout" class="easyui-layout">
-	<div data-options="region:'north',href:'${pageContext.request.contextPath }/tree/treeAction!north.action'" style="height: 65px; overflow: hidden;" class="logo"></div>
+	<div data-options="region:'north',href:'${pageContext.request.contextPath }/resource/resourceAction!north.action'" style="height: 65px; overflow: hidden;" class="logo"></div>
 	<div data-options="region:'west',href:'',split:true" title="系统菜单" style="width: 200px; padding: 10px;">
 		<ul id="mainMenu"></ul>
 	</div>
@@ -141,7 +141,7 @@
 			</div>
 		</div>
 	</div>
-	<div data-options="region:'south',href:'${pageContext.request.contextPath }/tree/treeAction!south.action',border:false" style="height: 30px; overflow: hidden;"></div>
+	<div data-options="region:'south',href:'${pageContext.request.contextPath }/resource/resourceAction!south.action',border:false" style="height: 30px; overflow: hidden;"></div>
 
 	<div id="loginDialog" title="解锁登录" style="display: none;">
 		<form method="post" class="form" onsubmit="return false;">

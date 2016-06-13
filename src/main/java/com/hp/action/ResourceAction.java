@@ -31,32 +31,26 @@ public class ResourceAction extends BaseAction<Resource> {
 	private ResourceService resourceService;
 
 	public void getTreeByUser() {
-		
-		List<Resource> findAll = resourceService.findAll();
-		for (Resource resource : findAll) {
-			System.out.println(resource.getName());
+		User sysUser = (User) ServletActionContext.getRequest().getSession().getAttribute(ConfigUtil.getSessionInfoName());
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("id", 1);
+		params.put("userId", sysUser.getId());
+		List<Resource> resources = resourceService.find("select distinct s from Resource s join s.roles role join role.users user where s.resourcetype.id=:id and user.id = :userId", params);
+		// "select distinct t from Syresource t join t.syroles role join role.syusers user"
+		List<Tree> tree = new ArrayList<Tree>();
+		for (Resource resource : resources) {
+			Tree node = new Tree();
+			// 复制属性值 这里只是复制了id跟pid
+			BeanUtils.copyProperties(resource, node);
+
+			node.setText(resource.getName());
+			Map<String, String> attributes = new HashMap<String, String>();
+			attributes.put("url", resource.getUrl());
+			attributes.put("target", resource.getTarget());
+			node.setAttributes(attributes);
+			tree.add(node);
 		}
-		
-//		User sysUser = (User) ServletActionContext.getRequest().getSession().getAttribute(ConfigUtil.getSessionInfoName());
-//		Map<String, Object> params = new HashMap<String, Object>();
-//		params.put("id", 1);
-//		params.put("userId", sysUser.getId());
-//		List<Resource> resources = resourceService.find("select distinct s from Resource s join s.roles role join role.users user where s.resourcetype.id=:id and user.id = :userId", params);
-//		// "select distinct t from Syresource t join t.syroles role join role.syusers user"
-//		List<Tree> tree = new ArrayList<Tree>();
-//		for (Resource resource : resources) {
-//			Tree node = new Tree();
-//			// 复制属性值 这里只是复制了id跟pid
-//			BeanUtils.copyProperties(resource, node);
-//
-//			node.setText(resource.getName());
-//			Map<String, String> attributes = new HashMap<String, String>();
-//			attributes.put("url", resource.getUrl());
-//			attributes.put("target", resource.getTarget());
-//			node.setAttributes(attributes);
-//			tree.add(node);
-//		}
-//		writeJson(tree);
+		writeJson(tree);
 	}
 
 	public void getTree() {
@@ -83,7 +77,7 @@ public class ResourceAction extends BaseAction<Resource> {
 	 * 获取资源树
 	 */
 	public void getResourceTree() {
-		List<Resource> resources = resourceService.find("from Resource s ");
+		List<Resource> resources = resourceService.find("from Resource s left join fetch s.resourcetype");
 		writeJson(resources);
 	}
 
@@ -141,17 +135,26 @@ public class ResourceAction extends BaseAction<Resource> {
 			resourceService.update(t);
 		}
 	}
-
-	public String index() {
+	
+	public void delete(){
+		resourceService.delete(resourceService.get(model.getId()));
+		ReturnJson result = new ReturnJson();
+		result.setMsg("删除成功");
+		result.setSuccess(true);
+		writeJson(result);
+	}
+	
+	//----------------------跳转----------------
+	
+	public String main(){
 		return "main";
 	}
-
-	public String north() {
-		return "north";
-	}
-
-	public String south() {
+	public String south(){
 		return "south";
 	}
+	public String north(){
+		return "north";
+	}
+	
 
 }
