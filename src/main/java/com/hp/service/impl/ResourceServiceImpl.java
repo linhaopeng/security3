@@ -5,33 +5,27 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.hibernate.Session;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
 import org.springframework.stereotype.Service;
 
+import com.hp.model.Resource;
 import com.hp.model.Role;
-import com.hp.model.Url;
-import com.hp.service.UrlService;
+import com.hp.service.ResourceService;
 
-/**
- * 通过URL地址获取相应权限然后在获取相应的角色集合
- * 
- * 需要实现FilterInvocationSecurityMetadataSource接口
- * 
- * @author baojulin
- *
- */
-@Service("urlService")
-public class UrlServiceImpl extends BaseServiceImpl<Url> implements UrlService, FilterInvocationSecurityMetadataSource {
+@Service("resourceService")
+public class ResourceServiceImpl extends BaseServiceImpl<Resource> implements ResourceService,FilterInvocationSecurityMetadataSource{
 
 	@Override
-	public Url getRoleByUrl(String url) {
-		String hql = "FROM Url u JOIN FETCH u.privilege up JOIN FETCH up.roles WHERE u.url=:url";
+	public Resource getRoleByUrl(String url) {
+		String hql = "FROM Resource r JOIN FETCH r.roles WHERE r.url=:url";
 		Session session = openSession();// 无法使用currentSession
-		return (Url) session.createQuery(hql).setString("url", url).uniqueResult();
+		return (Resource) session.createQuery(hql).setString("url", url).uniqueResult();
 	}
-
+	
 	/**
 	 * 此方法就是通过url地址获取 角色信息的方法
 	 */
@@ -43,11 +37,9 @@ public class UrlServiceImpl extends BaseServiceImpl<Url> implements UrlService, 
 		String url = filterInvocation.getRequestUrl();
 		// System.out.println("访问的URL地址为(包括参数):" + url);
 		url = filterInvocation.getRequest().getServletPath();
-		// System.out.println("访问的URL地址为:" + url);
-		Url urlObject = getRoleByUrl(url);
-		// System.out.println("urlObject:" + urlObject);
-		if (urlObject != null && urlObject.getPrivilege() != null) {
-			Set<Role> roles = urlObject.getPrivilege().getRoles();
+		Resource resource = getRoleByUrl(url);
+		if (resource != null ) {
+			Set<Role> roles = resource.getRoles();
 			Collection<ConfigAttribute> c = new HashSet<ConfigAttribute>();
 			c.addAll(roles);// roles 实现了ConfigAttribute接口
 			return c; // 将privilege中的roles改为Collection<ConfigAttribute> ，role需要实现ConfigAttribute接口
@@ -62,9 +54,6 @@ public class UrlServiceImpl extends BaseServiceImpl<Url> implements UrlService, 
 		return null;
 	}
 
-	/**
-	 * 如果为真则说明支持当前格式类型,才会到上面的 getAttributes 方法中
-	 */
 	@Override
 	public boolean supports(Class<?> clazz) {
 		// 需要返回true表示支持

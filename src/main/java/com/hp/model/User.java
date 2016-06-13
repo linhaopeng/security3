@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.DynamicInsert;
@@ -19,57 +21,69 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-/**
- * 用户实体类
- * 
- * @author baojulin
- *
- */
 @Entity
-@Table(name = "sys_user", schema = "")
+@Table(name = "SYSUSER", schema = "")
 @DynamicInsert(true)
 @DynamicUpdate(true)
-public class User extends BaseModel implements UserDetails {
+public class User extends BaseModel implements UserDetails{
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -4414050582422802953L;
-	private String login; // 不允许为null
-	private String pass;
-	private String name;
+	private static final long serialVersionUID = -1654907104097381594L;
+
+	private String ip;// 此属性不存数据库，虚拟属性
+
 	private Date createdatetime;
 	private Date updatedatetime;
+	private String loginname; // 不允许为null
+	private String pwd = "123456"; // 默认为123456
+	private String name;
 	private String sex;
 	private Integer age;
 	private String photo;
-
 	private Set<Role> roles = new HashSet<Role>(0);
 
-	private Collection<? extends GrantedAuthority> authorities;
-	private String password;
-	private String username;
-	private boolean accountNonExpired;
-	private boolean accountNonLocked;
-	private boolean credentialsNonExpired;
-	private boolean enabled;
-
-	@Column(name = "LOGIN", nullable = false, length = 100)
-	public String getLogin() {
-		return this.login;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "CREATEDATETIME", length = 7)
+	public Date getCreatedatetime() {
+		if (this.createdatetime != null)
+			return this.createdatetime;
+		return new Date();
 	}
 
-	public void setLogin(String login) {
-		this.login = login;
+	public void setCreatedatetime(Date createdatetime) {
+		this.createdatetime = createdatetime;
 	}
 
-	@Column(name = "PASS", length = 100)
-	public String getPass() {
-		return pass;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "UPDATEDATETIME", length = 7)
+	public Date getUpdatedatetime() {
+		if (this.updatedatetime != null)
+			return this.updatedatetime;
+		return new Date();
 	}
 
-	public void setPass(String pass) {
-		this.pass = pass;
+	public void setUpdatedatetime(Date updatedatetime) {
+		this.updatedatetime = updatedatetime;
+	}
+
+	@Column(name = "LOGINNAME", nullable = false, length = 100)
+	public String getLoginname() {
+		return this.loginname;
+	}
+
+	public void setLoginname(String loginname) {
+		this.loginname = loginname;
+	}
+
+	@Column(name = "PWD", length = 100)
+	public String getPwd() {
+		return this.pwd;
+	}
+
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
 	}
 
 	@Column(name = "NAME", length = 100)
@@ -81,8 +95,35 @@ public class User extends BaseModel implements UserDetails {
 		this.name = name;
 	}
 
+	@Column(name = "SEX", length = 1)
+	public String getSex() {
+		return this.sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+
+	@Column(name = "AGE", precision = 8, scale = 0)
+	public Integer getAge() {
+		return this.age;
+	}
+
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+
+	@Column(name = "PHOTO", length = 200)
+	public String getPhoto() {
+		return this.photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "sys_user_role", schema = "", joinColumns = { @JoinColumn(name = "aid", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "rid", nullable = false, updatable = false) })
+	@JoinTable(name = "SYSUSER_SYSROLE", schema = "", joinColumns = { @JoinColumn(name = "SYSUSER_ID", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "SYSROLE_ID", nullable = false, updatable = false) })
 	public Set<Role> getRoles() {
 		return roles;
 	}
@@ -91,38 +132,52 @@ public class User extends BaseModel implements UserDetails {
 		this.roles = roles;
 	}
 
-	/**
-	 * 返回角色集合
-	 */
 	@Transient
+	public String getIp() {
+		return ip;
+	}
+
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+	
+	//------------------------------  userDetails
+	private String password;
+	private String username;
+	private boolean accountNonExpired;
+	private boolean accountNonLocked;
+	private boolean credentialsNonExpired;
+	private boolean enabled;
+	
 	@Override
+	@Transient
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return roles;
 	}
 
 	/**
-	 * 返回密码
+	 * 获取密码
 	 */
-	@Transient
 	@Override
+	@Transient
 	public String getPassword() {
-		return pass;
+		return pwd;
 	}
 
 	/**
-	 * 返回用户名
+	 * 获取用户名
 	 */
-	@Transient
 	@Override
+	@Transient
 	public String getUsername() {
-		return name;
+		return loginname;
 	}
 
 	/**
 	 * 账户是否没有过期
 	 */
-	@Transient
 	@Override
+	@Transient
 	public boolean isAccountNonExpired() {
 		return true;
 	}
@@ -130,8 +185,8 @@ public class User extends BaseModel implements UserDetails {
 	/**
 	 * 是否没有被锁
 	 */
-	@Transient
 	@Override
+	@Transient
 	public boolean isAccountNonLocked() {
 		return true;
 	}
@@ -139,8 +194,8 @@ public class User extends BaseModel implements UserDetails {
 	/**
 	 * 用户的凭证是否没有过期
 	 */
-	@Transient
 	@Override
+	@Transient
 	public boolean isCredentialsNonExpired() {
 		return true;
 	}
@@ -148,81 +203,10 @@ public class User extends BaseModel implements UserDetails {
 	/**
 	 * 是否激活
 	 */
-	@Transient
 	@Override
+	@Transient
 	public boolean isEnabled() {
 		return true;
 	}
-	
-	@Column(name = "createdatetime", length = 100)
-	public Date getCreatedatetime() {
-		return createdatetime;
-	}
 
-	public void setCreatedatetime(Date createdatetime) {
-		this.createdatetime = createdatetime;
-	}
-
-	@Column(name = "updatedatetime", length = 100)
-	public Date getUpdatedatetime() {
-		return updatedatetime;
-	}
-
-	public void setUpdatedatetime(Date updatedatetime) {
-		this.updatedatetime = updatedatetime;
-	}
-
-	@Column(name = "sex", length = 2)
-	public String getSex() {
-		return sex;
-	}
-
-	public void setSex(String sex) {
-		this.sex = sex;
-	}
-
-	@Column(name = "age", precision = 8, scale = 0)
-	public Integer getAge() {
-		return age;
-	}
-
-	public void setAge(Integer age) {
-		this.age = age;
-	}
-
-	@Column(name = "photo", length = 100)
-	public String getPhoto() {
-		return photo;
-	}
-
-	public void setPhoto(String photo) {
-		this.photo = photo;
-	}
-	public void setAccountNonExpired(boolean accountNonExpired) {
-		this.accountNonExpired = accountNonExpired;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public void setAccountNonLocked(boolean accountNonLocked) {
-		this.accountNonLocked = accountNonLocked;
-	}
-
-	public void setCredentialsNonExpired(boolean credentialsNonExpired) {
-		this.credentialsNonExpired = credentialsNonExpired;
-	}
-
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
-
-	public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
-		this.authorities = authorities;
-	}
 }

@@ -21,13 +21,13 @@ import com.hp.service.UserService;
 public class UserServiceImpl extends BaseServiceImpl<User> implements UserService, UserDetailsService {
 
 	/**
-	 * 登录的时候，将用户信息存储到Account中
+	 * 登录的时候，将用户信息存储到user中
 	 */
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		String hql = "FROM User a LEFT JOIN FETCH a.roles WHERE a.login=:login";
+		String hql = "FROM User u LEFT JOIN FETCH u.roles WHERE u.loginname=:loginname";
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("login", username);
+		params.put("loginname", username);
 		return get(hql, params);
 		// return userDao.getJoinRole(username);
 	}

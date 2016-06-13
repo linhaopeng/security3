@@ -37,7 +37,7 @@ public class RoleAccessDecisionManager implements AccessDecisionManager {
 		// System.out.println("sysRole:" + configAttributes);
 
 		for (GrantedAuthority myRole : myRoles) {// 当前登录的角色
-			for (ConfigAttribute urlRoles : configAttributes) {// 前台传入的url的角色，UrlDaoImpl.getAttributes获得的
+			for (ConfigAttribute urlRoles : configAttributes) {// 前台传入的url的角色，resourceServiceImpl.getAttributes获得的
 				if (myRole.getAuthority().equals(urlRoles.getAttribute())) {
 					// 说明此URL地址符合权限,可以放行
 					return;

@@ -4,12 +4,15 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -17,27 +20,52 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-import org.springframework.security.access.ConfigAttribute;
-import org.springframework.security.core.GrantedAuthority;
 
 @Entity
-@Table(name = "SYSROLE", schema = "")
+@Table(name = "SYSRESOURCE", schema = "")
 @DynamicInsert(true)
 @DynamicUpdate(true)
-public class Role extends BaseModel implements GrantedAuthority,ConfigAttribute{
+public class Resource extends BaseModel {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 819803310961788818L;
+	private static final long serialVersionUID = -7287109326955757963L;
+
+	private int pid;// 虚拟属性，用于获得当前资源的父资源ID
+
 	private Date createdatetime;
 	private Date updatedatetime;
 	private String name;
+	private String url;
 	private String description;
 	private String iconCls;
 	private Integer seq;
-	private Set<User> users = new HashSet<User>(0);
+	private String target;
+	private ResourceType resourcetype;
+	private Resource resource;
+	private Set<Role> roles = new HashSet<Role>(0);
 	private Set<Resource> resources = new HashSet<Resource>(0);
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "SYRESOURCETYPE_ID")
+	public ResourceType getResourcetype() {
+		return resourcetype;
+	}
+
+	public void setResourcetype(ResourceType resourcetype) {
+		this.resourcetype = resourcetype;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "SYSRESOURCE_ID")
+	public Resource getResource() {
+		return resource;
+	}
+
+	public void setResource(Resource resource) {
+		this.resource = resource;
+	}
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "UPDATEDATETIME", length = 7)
@@ -72,6 +100,15 @@ public class Role extends BaseModel implements GrantedAuthority,ConfigAttribute{
 		this.name = name;
 	}
 
+	@Column(name = "URL", length = 200)
+	public String getUrl() {
+		return this.url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
 	@Column(name = "DESCRIPTION", length = 200)
 	public String getDescription() {
 		return this.description;
@@ -99,18 +136,31 @@ public class Role extends BaseModel implements GrantedAuthority,ConfigAttribute{
 		this.seq = seq;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "SYSUSER_SYSROLE", schema = "", joinColumns = { @JoinColumn(name = "SYSROLE_ID", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "SYSUSER_ID", nullable = false, updatable = false) })
-	public Set<User> getUsers() {
-		return users;
+	@Column(name = "TARGET", length = 100)
+	public String getTarget() {
+		return this.target;
 	}
 
-	public void setUsers(Set<User> users) {
-		this.users = users;
+	public void setTarget(String target) {
+		this.target = target;
 	}
 
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "SYSROLE_SYSRESOURCE", schema = "", joinColumns = { @JoinColumn(name = "SYSROLE_ID", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "SYSRESOURCE_ID", nullable = false, updatable = false) })
+	@JoinTable(name = "SYSROLE_SYSRESOURCE", schema = "", joinColumns = { @JoinColumn(name = "SYSRESOURCE_ID", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "SYSROLE_ID", nullable = false, updatable = false) })
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+
+	/**
+	 * mappedBy 设置主表 对应resource private SysResource resource;
+	 * 
+	 * @return
+	 */
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "resource", cascade = CascadeType.ALL)
 	public Set<Resource> getResources() {
 		return resources;
 	}
@@ -119,25 +169,16 @@ public class Role extends BaseModel implements GrantedAuthority,ConfigAttribute{
 		this.resources = resources;
 	}
 
-	
-	//-------------------GrantedAuthority
-	private String authority;
-	/**
-	 * 返回角色名称 
-	 */
-	@Override
 	@Transient
-	public String getAuthority() {
-		return name;
+	public int getPid() {
+		if (resource != null) {
+			return resource.getId();
+		}
+		return pid;
 	}
-	
-	//-------------------ConfigAttribute
-	private String attribute;
 
-	@Override
-	@Transient
-	public String getAttribute() {
-		return name;
+	public void setPid(int pid) {
+		this.pid = pid;
 	}
 
 }

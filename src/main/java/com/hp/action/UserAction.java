@@ -12,9 +12,9 @@ import com.hp.base.BaseAction;
 import com.hp.model.User;
 
 @ParentPackage("basePackage")
-@Namespace("/account")
-@Action(value = "accountAction")
-public class AccountAction extends BaseAction<User>{
+@Namespace("/user")
+@Action(value = "userAction")
+public class UserAction extends BaseAction<User>{
 	
 	private static final long serialVersionUID = -3131702037102065793L;
 
@@ -28,7 +28,7 @@ public class AccountAction extends BaseAction<User>{
 	 */
 	public String test() {
 		//测试注入model
-		System.out.println(model.getLogin());
+		System.out.println(model.getLoginname());
 		ServletActionContext.getRequest().setAttribute("list", "哈哈哈");
 		return "list";
 	}
