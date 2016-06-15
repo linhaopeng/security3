@@ -156,5 +156,4 @@ public class ResourceAction extends BaseAction<Resource> {
 		return "north";
 	}
 	
-
 }

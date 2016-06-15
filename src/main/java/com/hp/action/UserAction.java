@@ -68,7 +68,7 @@ public class UserAction extends BaseAction<User> {
 	/**
 	 * 获取用户列表 ，分页+模糊查询
 	 */
-	public void list() {
+	public void getList() {
 		DataGrid<User> grid = userService.findByPage(model, sort, order, page, rows);
 		writeJson(grid);
 	}
@@ -154,7 +154,7 @@ public class UserAction extends BaseAction<User> {
 	/**
 	 * 修改用户所属角色
 	 */
-	public void grantRole() {
+	public void doGrantRole() {
 		ReturnJson json = new ReturnJson("修改失败");
 		try {
 			User user = userService.get(model.getId());
@@ -179,6 +179,10 @@ public class UserAction extends BaseAction<User> {
 		} catch (Exception e) {
 		}
 		writeJson(json);
+	}
+	
+	public String grantRole(){
+		return "grantRole";
 	}
 
 }

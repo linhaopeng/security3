@@ -33,7 +33,7 @@ public class RoleAction extends BaseAction<Role> {
 	@Autowired
 	private ResourceService resourceService;
 	
-	public void list() {
+	public void getList() {
 		HqlHelper hqlHelper = new HqlHelper(Role.class, "r")//
 				.addCondition(model.getName() != null, "r.name like", "name", "%" + model.getName() + "%")//
 				.addOrder(sort, order);
@@ -92,7 +92,7 @@ public class RoleAction extends BaseAction<Role> {
 	/**
 	 * 修改角色权限
 	 */
-	public void grantPrivilege() {
+	public void doGrantPrivilege() {
 		ReturnJson json = new ReturnJson("修改失败");
 		try {
 			Role role = roleService.get(model.getId());
@@ -130,4 +130,7 @@ public class RoleAction extends BaseAction<Role> {
 		writeJson(json);
 	}
 
+	public String grantPrivilege(){
+		return "grantPrivilege";
+	}
 }

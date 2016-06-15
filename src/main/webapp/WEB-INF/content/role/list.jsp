@@ -3,13 +3,13 @@
 <html>
 <head>
 <title></title>
-<jsp:include page="../../common/common.jsp"></jsp:include>
+<%@ include file="/common/common.jsp" %>
 <script type="text/javascript">
 	var grid;
 	var addFun = function() {
 		var dialog = parent.sy.modalDialog({
 			title : '添加角色信息',
-			url :  '${cxt}/main/role/editUI.jsp',
+			url :  '${cxt}/role/roleAction!editUI.action',
 			buttons : [ {
 				text : '添加',
 				handler : function() {
@@ -21,13 +21,13 @@
 	var showFun = function(id) {
 		var dialog = parent.sy.modalDialog({
 			title : '查看用户信息',
-			url : '${cxt}/main/role/editUI.jsp?id=' + id
+			url : '${cxt}/role/roleAction!editUI.action?id=' + id
 		});
 	};
 	var editFun = function(id) {
 		var dialog = parent.sy.modalDialog({
 			title : '编辑用户信息',
-			url : '${cxt}/main/role/editUI.jsp?id=' + id,
+			url : '${cxt}/role/roleAction!editUI.action?id=' + id,
 			buttons : [ {
 				text : '编辑',
 				handler : function() {
@@ -50,7 +50,7 @@
 	var grantPrivilegeFun = function(id) {
 		var dialog = parent.sy.modalDialog({
 			title : '修改权限',
-			url : '${cxt}/main/role/grantPrivilege.jsp?id=' + id,
+			url : '${cxt}/role/roleAction!doGrantPrivilege.action?id=' + id,
 			buttons : [ {
 				text : '修改',
 				handler : function() {
@@ -62,7 +62,7 @@
 	$(function() {
 		grid = $('#grid').datagrid({
 			title : '',
-			url :  '${cxt}/role/roleAction!list.action',
+			url :  '${cxt}/role/roleAction!getList.action',
 			striped : true,//是否显示斑马线效果。
 			rownumbers : true, //左边显示序号
 			pagination : true, //是否分页

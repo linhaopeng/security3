@@ -4,13 +4,13 @@
 <html>
 <head>
 <title></title>
-<jsp:include page="../../common/common.jsp"></jsp:include>
+<%@ include file="/common/common.jsp" %>
 <script type="text/javascript">
 	var grid;
 	var addFun = function() {
 		var dialog = parent.sy.modalDialog({
 			title : '添加资源信息',
-			url : '${cxt}/main/resource/editUI.jsp',
+			url : '${cxt}/resource/resourceAction!editUI.action',
 			buttons : [ {
 				text : '添加',
 				handler : function() {
@@ -22,13 +22,13 @@
 	var showFun = function(id) {
 		var dialog = parent.sy.modalDialog({
 			title : '查看资源信息',
-			url : '${cxt}/main/resource/editUI.jsp?id=' + id
+			url : '${cxt}/resource/resourceAction!editUI.action?id=' + id
 		});
 	};
 	var editFun = function(id) {
 		var dialog = parent.sy.modalDialog({
 			title : '编辑资源信息',
-			url : '${cxt}/main/resource/editUI.jsp?id=' + id,
+			url : '${cxt}/resource/resourceAction!editUI.action?id=' + id,
 			buttons : [ {
 				text : '编辑',
 				handler : function() {

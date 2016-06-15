@@ -191,5 +191,12 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T> {
 		this.ids = ids;
 	}
 	
-
+	//-------------------------跳转-------------------------
+	public String list(){
+		return "list";
+	}
+	
+	public String editUI(){
+		return "editUI";
+	}
 }

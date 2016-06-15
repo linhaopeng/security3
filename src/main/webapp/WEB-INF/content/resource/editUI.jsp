@@ -4,7 +4,7 @@
 <html>
 <head>
 <title></title>
-<jsp:include page="../../common/common.jsp"></jsp:include>
+<%@ include file="/common/common.jsp" %>
 <script type="text/javascript">
 	var submitForm = function($dialog, $grid, $pjq, $mainMenu) {
 		if ($('form').form('validate')) {
