@@ -22,6 +22,7 @@ import com.hp.pageModel.ReturnJson;
 import com.hp.service.RoleService;
 import com.hp.service.UserService;
 import com.hp.utils.HqlHelper;
+import com.hp.utils.MD5Util;
 
 @ParentPackage("basePackage")
 @Namespace("/user")
@@ -56,6 +57,7 @@ public class UserAction extends BaseAction<User> {
 		ReturnJson json = new ReturnJson("添加失败");
 		try {
 			// TODO 判断登录名是否存在
+			model.setPwd(MD5Util.md5(model.getPwd()));
 			userService.save(model);
 			json.setMsg("添加成功");
 			json.setSuccess(true);
@@ -83,7 +85,8 @@ public class UserAction extends BaseAction<User> {
 			User user = userService.get(model.getId());
 			deletePhoto(user); // 删除头像
 			// 修改数据库数据
-			BeanUtils.copyProperties(model, user, new String[] { "createdatetime" });
+			model.setPwd(MD5Util.md5(model.getPwd()));
+			BeanUtils.copyProperties(model, user, new String[] { "createdatetime","roles" });
 			userService.update(user);
 			json.setMsg("编辑成功");
 			json.setSuccess(true);

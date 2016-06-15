@@ -107,7 +107,7 @@
 			});
 			up.refresh();
 		});
-		/* uploader.bind('UploadProgress', function(up, file) {//上传进度改变
+		uploader.bind('UploadProgress', function(up, file) {//上传进度改变
 			var msg;
 			if (file.percent == 100) {
 				msg = '99';//因为某些大文件上传到服务器需要合并的过程，所以强制客户看到99%，等后台合并完成...
@@ -120,7 +120,7 @@
 				title : '文件上传中...',
 				value : msg
 			});
-		}); */
+		}); 
 		uploader.bind('Error', function(up, err) {//出现错误
 			$('#filelist').append("<div>错误代码: " + err.code + ", 描述信息: " + err.message + (err.file ? ", 文件名称: " + err.file.name : "") + "</div>");
 			up.refresh();
@@ -134,6 +134,7 @@
 				//$('#f1').append('<input type="hidden" name="fileUrl" value="'+response.fileUrl+'"/>');
 				//$('#f1').append('<input type="hidden" name="fileName" value="'+file.name+'"/><br/>');
 				$(':input[name="photo"]').val(response.fileUrl);
+				parent.sy.progressBar('close');
 			}
 		});
 		uploader.init();
