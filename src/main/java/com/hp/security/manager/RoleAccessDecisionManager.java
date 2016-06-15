@@ -12,6 +12,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 
+import com.hp.utils.ConfigUtil;
+
 /**
  * 此类是决策器： 用来对 用户应有的角色,与URL地址可以访问的角色进行对比,如果不匹配则抛出异常
  * 

@@ -4,7 +4,7 @@
 <html>
 <head>
 <title></title>
-<%@ include file="/common/common.jsp" %>nclude>
+<%@ include file="/common/common.jsp" %>
 <script type="text/javascript">
 	var submitForm = function($dialog, $grid, $pjq) {
 		//译者注：（1.3.4新增获取方式）
