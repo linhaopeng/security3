@@ -50,7 +50,7 @@
 	var grantPrivilegeFun = function(id) {
 		var dialog = parent.sy.modalDialog({
 			title : '修改权限',
-			url : '${cxt}/role/roleAction!doGrantPrivilege.action?id=' + id,
+			url : '${cxt}/role/roleAction!grantPrivilege.action?id=' + id,
 			buttons : [ {
 				text : '修改',
 				handler : function() {

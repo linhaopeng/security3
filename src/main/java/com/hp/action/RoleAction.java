@@ -82,7 +82,7 @@ public class RoleAction extends BaseAction<Role> {
 	 * 根据角色id获取角色已有权限
 	 */
 	public void getPrivilegeByRoleId() {
-		String hql = "select distinct res from SysRole r join r.resources res where r.id=:id";
+		String hql = "select distinct res from Role r join r.resources res where r.id=:id";
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", model.getId());
 		List<Role> resource = roleService.find(hql, map);
