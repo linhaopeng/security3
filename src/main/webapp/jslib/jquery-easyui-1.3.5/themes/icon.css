@@ -66,3 +66,28 @@
 .icon-mini-refresh{
 	background:url('icons/mini_refresh.png') no-repeat center center;
 }
+
+/********************自定义************************/
+.icon-user_suit{background:url('IconsExtension/user_suit.png') no-repeat center center;}
+.icon-shield_silver{background:url('IconsExtension/shield_silver.png') no-repeat center center;}
+.icon-tux{background:url('IconsExtension/tux.png') no-repeat center center;}
+.icon-wrench_orange{background:url('IconsExtension/wrench_orange.png') no-repeat center center;}
+.icon-folder_table{background:url('IconsExtension/folder_table.png') no-repeat center center;}
+.icon-user_comment{background:url('IconsExtension/user_comment.png') no-repeat center center;}
+.icon-clock_red{background:url('IconsExtension/clock_red.png') no-repeat center center;}
+.icon-hourglass_add{background:url('IconsExtension/hourglass_add.png') no-repeat center center;}
+.icon-medal_bronze_3{background:url('IconsExtension/medal_bronze_3.png') no-repeat center center;}
+.icon-medal_bronze_2{background:url('IconsExtension/medal_bronze_2.png') no-repeat center center;}
+.icon-medal_gold_1{background:url('IconsExtension/medal_gold_1.png') no-repeat center center;}
+.icon-table_add{background:url('IconsExtension/table_add.png') no-repeat center center;}
+.icon-table_go{background:url('IconsExtension/table_go.png') no-repeat center center;}
+.icon-zoom{background:url('IconsExtension/zoom.png') no-repeat center center;}
+.icon-arrow_refresh_small{background:url('IconsExtension/arrow_refresh_small.png') no-repeat center center;}
+.icon-arrow_rotate_clockwise{background:url('IconsExtension/arrow_rotate_clockwise.png') no-repeat center center;}
+.icon-arrow_out{background:url('IconsExtension/arrow_out.png') no-repeat center center;}
+.icon-arrow_in{background:url('IconsExtension/arrow_in.png') no-repeat center center;}
+.icon-arrow_up{background:url('IconsExtension/arrow_up.png') no-repeat center center;}
+.icon-arrow_left{background:url('IconsExtension/arrow_left.png') no-repeat center center;}
+.icon-arrow_down{background:url('IconsExtension/arrow_down.png') no-repeat center center;}
+.icon-arrow_right{background:url('IconsExtension/arrow_right.png') no-repeat center center;}
+.icon-zoom_out{background:url('IconsExtension/zoom_out.png') no-repeat center center;}

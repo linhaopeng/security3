@@ -181,7 +181,7 @@ function query(){
 								</td>
 								<td>创建时间</td>
 								<td><input name="startcreatedatetime" class="Wdate" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" style="width: 120px;" />-<input name="endcreatedatetime" class="Wdate" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" style="width: 120px;" /></td>
-								<td><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'ext-icon-zoom',plain:true" onclick="query()">过滤</a><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'ext-icon-zoom_out',plain:true" onclick="$('#searchForm input').val('');grid.datagrid('load',{});">重置过滤</a></td>
+								<td><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-zoom',plain:true" onclick="query()">过滤</a><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'ext-icon-zoom_out',plain:true" onclick="$('#searchForm input').val('');grid.datagrid('load',{});">重置过滤</a></td>
 							</tr>
 						</table>
 					</form>
@@ -191,10 +191,10 @@ function query(){
 				<td>
 					<table>
 						<tr>
-							<td><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'ext-icon-note_add',plain:true" onclick="addFun();">添加</a></td>
+							<td><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="addFun();">添加</a></td>
 							<td><div class="datagrid-btn-separator"></div></td>
-							<td><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'ext-icon-table_add',plain:true" onclick="javascript:alert('未实现')">导入</a></td>
-							<td><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'ext-icon-table_go',plain:true" onclick="javascript:alert('未实现')">导出</a></td>
+							<td><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-table_add',plain:true" onclick="javascript:alert('未实现')">导入</a></td>
+							<td><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-table_go',plain:true" onclick="javascript:alert('未实现')">导出</a></td>
 						</tr>
 					</table>
 				</td>

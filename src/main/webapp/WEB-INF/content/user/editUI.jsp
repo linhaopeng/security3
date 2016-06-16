@@ -150,7 +150,7 @@
 				<tr>
 					<th>编号</th>
 					<td><input name="id" value="${param.id}" readonly="readonly" /></td>
-					<th>登陆名称</th>
+					<th>登录名称</th>
 					<td><input name="loginname" class="easyui-validatebox" data-options="required:true" /></td>
 				</tr>
 				<tr>

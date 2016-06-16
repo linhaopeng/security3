@@ -57,32 +57,32 @@
 			fit : true,
 			border : false,
 			tools : [ {
-				text : '↑',
-				iconCls : 'ext-icon-arrow_up',
+				text : '上',
+				iconCls : 'icon-arrow_up',
 				handler : function() {
 					mainTabs.tabs({
 						tabPosition : 'top'
 					});
 				}
 			}, {
-				text : '←',
-				iconCls : 'ext-icon-arrow_left',
+				text : '左',
+				iconCls : 'icon-arrow_left',
 				handler : function() {
 					mainTabs.tabs({
 						tabPosition : 'left'
 					});
 				}
 			}, {
-				text : '↓',
-				iconCls : 'ext-icon-arrow_down',
+				text : '下',
+				iconCls : 'icon-arrow_down',
 				handler : function() {
 					mainTabs.tabs({
 						tabPosition : 'bottom'
 					});
 				}
 			}, {
-				text : '→',
-				iconCls : 'ext-icon-arrow_right',
+				text : '右',
+				iconCls : 'icon-arrow_right',
 				handler : function() {
 					mainTabs.tabs({
 						tabPosition : 'right'
@@ -90,7 +90,7 @@
 				}
 			}, {
 				text : '刷新',
-				iconCls : 'icon-mini-refresh',
+				iconCls : 'icon-arrow_rotate_clockwise',
 				handler : function() {
 					var panel = mainTabs.tabs('getSelected').panel('panel');
 					var frame = panel.find('iframe');
@@ -113,7 +113,7 @@
 				}
 			}, {
 				text : '关闭',
-				iconCls : 'ext-icon-cross',
+				iconCls : 'icon-no',
 				handler : function() {
 					var index = mainTabs.tabs('getTabIndex', mainTabs.tabs('getSelected'));
 					var tab = mainTabs.tabs('getTab', index);

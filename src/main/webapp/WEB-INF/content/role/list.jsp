@@ -137,10 +137,10 @@ function query(){
 	<div id="toolbar" style="display: none;">
 		<table>
 			<tr>
-				<td><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'ext-icon-note_add',plain:true" onclick="addFun();">添加</a></td>
+				<td><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="addFun();">添加</a></td>
 				<td><div class="datagrid-btn-separator"></div></td>
 				<td><input id="searchBox" class="easyui-searchbox" style="width: 150px" data-options="searcher:function(value,name){grid.datagrid('load',{'name':value});},prompt:'搜索角色名称'"></input></td>
-				<td><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'ext-icon-zoom_out',plain:true" onclick="$('#searchBox').searchbox('setValue','');grid.datagrid('load',{});">清空查询</a></td>
+				<td><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-zoom_out',plain:true" onclick="$('#searchBox').searchbox('setValue','');grid.datagrid('load',{});">清空查询</a></td>
 			</tr>
 		</table>
 	</div>
