@@ -17,8 +17,6 @@
 		});
 	};
 </script>
-<div id="sessionInfoDiv" style="position: absolute; right: 10px; top: 5px;">
-</div>
 <div style="position: absolute; right: 0px; bottom: 0px;">
 	<a href="javascript:void(0);" class="easyui-menubutton" data-options="menu:'#layout_north_pfMenu',iconCls:'ext-icon-rainbow'">更换皮肤</a> 
 	<a href="javascript:void(0);" class="easyui-menubutton" data-options="menu:'#layout_north_kzmbMenu',iconCls:'ext-icon-cog'">个人设置</a> 
@@ -28,14 +26,9 @@
 	<div onclick="changeThemeFun('default');" title="default">default</div>
 	<div onclick="changeThemeFun('gray');" title="gray">gray</div>
 	<div onclick="changeThemeFun('metro');" title="metro">metro</div>
+	<div class="menu-sep"></div>
 	<div onclick="changeThemeFun('bootstrap');" title="bootstrap">bootstrap</div>
 	<div onclick="changeThemeFun('black');" title="black">black</div>
-	<div class="menu-sep"></div>
-	<div onclick="changeThemeFun('metro-blue');" title="metro-blue">metro-blue</div>
-	<div onclick="changeThemeFun('metro-gray');" title="metro-gray">metro-gray</div>
-	<div onclick="changeThemeFun('metro-green');" title="metro-green">metro-green</div>
-	<div onclick="changeThemeFun('metro-orange');" title="metro-orange">metro-orange</div>
-	<div onclick="changeThemeFun('metro-red');" title="metro-red">metro-red</div>
 </div>
 <div id="layout_north_kzmbMenu" style="width: 100px; display: none;">
 	<div data-options="iconCls:'ext-icon-user_edit'" onclick="$('#passwordDialog').dialog('open');">修改密码</div>

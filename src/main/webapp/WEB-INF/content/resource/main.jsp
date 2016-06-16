@@ -5,7 +5,9 @@
 <title>SSHE</title>
 <style type="text/css">
 	.logo{
-		background: url("../images/logo.png") no-repeat left bottom;
+		height: 65px; 
+		overflow: hidden;
+		background: url("${pageContext.request.contextPath}/images/logo.png") no-repeat left bottom;
 	}
 </style>
 <%@ include file="/common/common.jsp" %>
@@ -130,10 +132,14 @@
 </script>
 </head>
 <body id="mainLayout" class="easyui-layout">
-	<div data-options="region:'north',href:'${pageContext.request.contextPath }/resource/resourceAction!north.action'" style="height: 65px; overflow: hidden;" class="logo"></div>
-	<div data-options="region:'west',href:'',split:true" title="系统菜单" style="width: 200px; padding: 10px;">
+	<!-- 上部分   -->
+	<div data-options="region:'north',href:'${pageContext.request.contextPath }/resource/resourceAction!north.action'" class="logo"></div>
+	<!-- 左边导航栏 -->
+	<div data-options="region:'west',href:'',split:true" title="${userInfo.name },你好!" style="width: 200px; padding: 10px;">
 		<ul id="mainMenu"></ul>
 	</div>
+	
+	<!-- 中间内容 选项卡    -->
 	<div data-options="region:'center'" style="overflow: hidden;">
 		<div id="mainTabs">
 			<div title="关于SSHE" data-options="iconCls:'icon-help'">
@@ -141,6 +147,8 @@
 			</div>
 		</div>
 	</div>
+	
+	<!-- 底部声明    -->
 	<div data-options="region:'south',href:'${pageContext.request.contextPath }/resource/resourceAction!south.action',border:false" style="height: 30px; overflow: hidden;"></div>
 
 	<div id="loginDialog" title="解锁登录" style="display: none;">
