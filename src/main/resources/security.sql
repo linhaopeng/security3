@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50532
 File Encoding         : 65001
 
-Date: 2016-06-15 12:26:21
+Date: 2016-06-17 10:53:27
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -41,20 +41,20 @@ CREATE TABLE `sysresource` (
 -- ----------------------------
 -- Records of sysresource
 -- ----------------------------
-INSERT INTO `sysresource` VALUES ('1', '2016-01-25 16:20:18', '系统管理描述', null, '系统管理', null, null, '2016-01-25 16:20:18', '', null, '1');
-INSERT INTO `sysresource` VALUES ('2', '2016-01-25 16:20:18', '用户管理描述', null, '用户管理', '98', null, '2016-02-03 16:29:51', '/user/userAction!list.action', '1', '1');
-INSERT INTO `sysresource` VALUES ('3', '2016-01-25 16:20:18', '资源管理描述', null, '资源管理', '99', null, '2016-02-04 14:37:59', '/resource/resourceAction!list.action', '1', '1');
-INSERT INTO `sysresource` VALUES ('4', '2016-01-25 16:20:18', '角色管理描述', null, '角色管理', null, null, '2016-01-25 16:20:18', '/role/roleAction!list.action', '1', '1');
-INSERT INTO `sysresource` VALUES ('5', '2016-01-25 16:20:18', '系统报表描述', null, '系统报表', null, null, '2016-01-25 16:20:18', '', null, '1');
-INSERT INTO `sysresource` VALUES ('6', '2016-01-25 16:20:18', '用户角色分布描述', null, '用户角色分布', null, null, '2016-01-25 16:20:18', '/base/syresource!treeGrid', '5', '1');
-INSERT INTO `sysresource` VALUES ('7', '2016-01-25 16:20:18', '注册时间分布描述', null, '注册时间分布', null, null, '2016-01-25 16:20:18', '/base/syresource!treeGrid', '5', '1');
+INSERT INTO `sysresource` VALUES ('1', '2016-01-25 16:20:18', '系统管理描述', 'icon-shield_silver', '系统管理', null, null, '2016-01-25 16:20:18', '', null, '1');
+INSERT INTO `sysresource` VALUES ('2', '2016-01-25 16:20:18', '用户管理描述', 'icon-user_suit', '用户管理', '98', null, '2016-02-03 16:29:51', '/user/userAction!list.action', '1', '1');
+INSERT INTO `sysresource` VALUES ('3', '2016-01-25 16:20:18', '资源管理描述', 'icon-wrench_orange', '资源管理', '99', null, '2016-02-04 14:37:59', '/resource/resourceAction!list.action', '1', '1');
+INSERT INTO `sysresource` VALUES ('4', '2016-01-25 16:20:18', '角色管理描述', 'icon-tux', '角色管理', null, null, '2016-01-25 16:20:18', '/role/roleAction!list.action', '1', '1');
+INSERT INTO `sysresource` VALUES ('5', '2016-01-25 16:20:18', '系统报表描述', 'icon-folder_table', '系统报表', null, null, '2016-01-25 16:20:18', '', null, '1');
+INSERT INTO `sysresource` VALUES ('6', '2016-01-25 16:20:18', '用户角色分布描述', 'icon-user_comment', '用户角色分布', null, null, '2016-01-25 16:20:18', '/base/syresource!treeGrid', '5', '1');
+INSERT INTO `sysresource` VALUES ('7', '2016-01-25 16:20:18', '注册时间分布描述', 'icon-clock_red', '注册时间分布', null, null, '2016-01-25 16:20:18', '/base/syresource!treeGrid', '5', '1');
 INSERT INTO `sysresource` VALUES ('8', '2016-02-03 10:27:14', '添加用户描述', null, '添加用户', '101', null, '2016-02-04 14:36:48', '/user/userAction!save.action', '2', '2');
 INSERT INTO `sysresource` VALUES ('9', '2016-02-03 12:04:07', '删除用户描述', null, '删除资源', '100', null, '2016-05-19 10:23:56', '/user/userAction!delete.action', '2', '2');
 INSERT INTO `sysresource` VALUES ('10', '2016-02-03 12:05:45', '修改用户描述', null, '修改用户', '100', null, '2016-02-03 12:05:45', '/user/userAction!update.action', '2', '2');
-INSERT INTO `sysresource` VALUES ('11', '2016-02-03 15:01:56', null, null, '其他', '100', null, '2016-02-03 15:01:56', '', null, '1');
-INSERT INTO `sysresource` VALUES ('12', '2016-02-03 16:50:58', null, null, 'javamelody项目监控', '100', null, '2016-02-03 16:50:58', '/monitoring', '11', '1');
-INSERT INTO `sysresource` VALUES ('13', '2016-02-03 17:37:05', null, null, 'action监控', '102', null, '2016-02-03 17:37:20', '/config-browser/showConstants.action', '11', '1');
-INSERT INTO `sysresource` VALUES ('14', '2016-02-03 17:38:40', null, null, '数据源监控', '100', null, '2016-02-03 17:38:40', '/druid', '11', '1');
+INSERT INTO `sysresource` VALUES ('11', '2016-02-03 15:01:56', null, 'icon-hourglass_add', '其他', '100', null, '2016-02-03 15:01:56', '', null, '1');
+INSERT INTO `sysresource` VALUES ('12', '2016-02-03 16:50:58', null, 'icon-medal_gold_1', 'javamelody项目监控', '100', null, '2016-02-03 16:50:58', '/monitoring', '11', '1');
+INSERT INTO `sysresource` VALUES ('13', '2016-02-03 17:37:05', null, 'icon-medal_bronze_2', 'action监控', '102', null, '2016-02-03 17:37:20', '/config-browser/showConstants.action', '11', '1');
+INSERT INTO `sysresource` VALUES ('14', '2016-02-03 17:38:40', null, 'icon-medal_bronze_3', '数据源监控', '100', null, '2016-02-03 17:38:40', '/druid', '11', '1');
 INSERT INTO `sysresource` VALUES ('15', '2016-02-04 14:36:04', null, null, '查看用户', '94', null, '2016-02-04 14:36:04', '/user/userAction!getList.action', '2', '2');
 INSERT INTO `sysresource` VALUES ('16', '2016-02-04 14:38:23', null, null, '查看资源', '100', null, '2016-02-04 14:38:23', '/resource/resourceAction!getResourceTree.action', '3', '2');
 INSERT INTO `sysresource` VALUES ('17', '2016-02-04 14:55:17', '添加资源描述', null, '添加资源', '99', null, '2016-02-04 14:55:42', '/resource/resourceAction!save.action', '3', '2');
@@ -125,15 +125,22 @@ INSERT INTO `sysrole_sysresource` VALUES ('3', '2');
 INSERT INTO `sysrole_sysresource` VALUES ('3', '3');
 INSERT INTO `sysrole_sysresource` VALUES ('3', '4');
 INSERT INTO `sysrole_sysresource` VALUES ('3', '5');
+INSERT INTO `sysrole_sysresource` VALUES ('8', '5');
 INSERT INTO `sysrole_sysresource` VALUES ('3', '6');
+INSERT INTO `sysrole_sysresource` VALUES ('8', '6');
 INSERT INTO `sysrole_sysresource` VALUES ('3', '7');
+INSERT INTO `sysrole_sysresource` VALUES ('8', '7');
 INSERT INTO `sysrole_sysresource` VALUES ('3', '8');
 INSERT INTO `sysrole_sysresource` VALUES ('3', '9');
 INSERT INTO `sysrole_sysresource` VALUES ('3', '10');
 INSERT INTO `sysrole_sysresource` VALUES ('3', '11');
+INSERT INTO `sysrole_sysresource` VALUES ('8', '11');
 INSERT INTO `sysrole_sysresource` VALUES ('3', '12');
+INSERT INTO `sysrole_sysresource` VALUES ('8', '12');
 INSERT INTO `sysrole_sysresource` VALUES ('3', '13');
+INSERT INTO `sysrole_sysresource` VALUES ('8', '13');
 INSERT INTO `sysrole_sysresource` VALUES ('3', '14');
+INSERT INTO `sysrole_sysresource` VALUES ('8', '14');
 INSERT INTO `sysrole_sysresource` VALUES ('3', '15');
 INSERT INTO `sysrole_sysresource` VALUES ('3', '16');
 INSERT INTO `sysrole_sysresource` VALUES ('3', '17');
@@ -141,6 +148,7 @@ INSERT INTO `sysrole_sysresource` VALUES ('3', '18');
 INSERT INTO `sysrole_sysresource` VALUES ('3', '19');
 INSERT INTO `sysrole_sysresource` VALUES ('3', '20');
 INSERT INTO `sysrole_sysresource` VALUES ('3', '21');
+INSERT INTO `sysrole_sysresource` VALUES ('8', '21');
 
 -- ----------------------------
 -- Table structure for sysuser
@@ -162,7 +170,7 @@ CREATE TABLE `sysuser` (
 -- ----------------------------
 -- Records of sysuser
 -- ----------------------------
-INSERT INTO `sysuser` VALUES ('1', null, '2016-01-25 16:23:19', 'linhp', 'hp', null, 'e10adc3949ba59abbe56e057f20f883e', '1', '2016-02-04 11:25:48');
+INSERT INTO `sysuser` VALUES ('1', null, '2016-01-25 16:23:19', 'linhp', '浩鹏', null, 'e10adc3949ba59abbe56e057f20f883e', '1', '2016-06-16 17:27:54');
 INSERT INTO `sysuser` VALUES ('2', '2', '2016-01-28 11:38:25', '啊啊士大夫1', 'sad发', null, 'e10adc3949ba59abbe56e057f20f883e', '1', '2016-01-28 11:41:03');
 INSERT INTO `sysuser` VALUES ('3', null, '2016-01-29 11:36:19', 'adf ', 'adf ', '/ssheUploadFile/userPhoto/2016/01/29/ab48560de0dd40829ede8ae4a3c964c3.jpg', 'e10adc3949ba59abbe56e057f20f883e', '1', '2016-01-29 11:36:19');
 INSERT INTO `sysuser` VALUES ('4', null, '2016-01-29 11:45:16', 'adfadsf', 'asdfadsf', '/ssheUploadFile/userPhoto/2016/01/29/8f2326dd3f44497abacaf4a3d6d1b157.jpg', 'e10adc3949ba59abbe56e057f20f883e', '1', '2016-01-29 11:45:16');
