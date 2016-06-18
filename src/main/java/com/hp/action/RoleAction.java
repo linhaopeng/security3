@@ -1,19 +1,17 @@
 package com.hp.action;
 
-
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.struts2.convention.annotation.Action;
-import org.apache.struts2.convention.annotation.Namespace;
-import org.apache.struts2.convention.annotation.ParentPackage;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.hp.base.BaseAction;
 import com.hp.model.Resource;
 import com.hp.model.Role;
 import com.hp.pageModel.DataGrid;
@@ -22,80 +20,84 @@ import com.hp.service.ResourceService;
 import com.hp.service.RoleService;
 import com.hp.utils.HqlHelper;
 
-@ParentPackage("basePackage")
-@Namespace("/role")
-@Action(value = "roleAction")
-// 访问路径 /role/roleAction!方法.action
-public class RoleAction extends BaseAction<Role> {
-	
+@Controller
+@RequestMapping("/role")
+public class RoleAction extends BaseAction {
+
 	@Autowired
 	private RoleService roleService;
 	@Autowired
 	private ResourceService resourceService;
-	
-	public void getList() {
+
+	@RequestMapping("/getList")
+	@ResponseBody
+	public DataGrid<Role> getList(Role role, String sort, String order, Integer page, Integer rows) {
 		HqlHelper hqlHelper = new HqlHelper(Role.class, "r")//
-				.addCondition(model.getName() != null, "r.name like", "name", "%" + model.getName() + "%")//
+				.addCondition(role.getName() != null, "r.name like", "name", "%" + role.getName() + "%")//
 				.addOrder(sort, order);
 		List<Role> roles = roleService.find(hqlHelper.getQueryListHql(), hqlHelper.getMap(), page, rows);
 		Long count = roleService.count(hqlHelper.getQueryCountHql(), hqlHelper.getMap());
 		DataGrid<Role> grid = new DataGrid<Role>();
 		grid.setRows(roles);
 		grid.setTotal(count);
-		writeJson(grid);
-	}
-	
-	public String test(){
-		return "test";
+		return grid;
 	}
 
-	public void save() {
+	@RequestMapping("save")
+	@ResponseBody
+	public ReturnJson save(Role role) {
 		ReturnJson json = new ReturnJson("添加失败");
 		try {
-			roleService.save(model);
+			roleService.save(role);
 			json.setMsg("添加成功");
 			json.setSuccess(true);
 		} catch (Exception e) {
 		}
-		writeJson(json);
+		return json;
 	}
 
-	public void getById() {
-		Role sysRole = roleService.get(model.getId());
-		writeJson(sysRole);
+	@RequestMapping("getById")
+	@ResponseBody
+	public Role getById(Role role) {
+		return roleService.get(role.getId());
 	}
 
-	public void delete() {
+	@RequestMapping("delete")
+	@ResponseBody
+	public ReturnJson delete(Role role) {
 		ReturnJson json = new ReturnJson("删除失败");
 		try {
-			//SysRole sysRole = roleService.get(model.getId());
-			roleService.delete2(model);
+			// SysRole sysRole = roleService.get(role.getId());
+			roleService.delete2(role);
 			json.setMsg("删除成功");
 			json.setSuccess(true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		writeJson(json);
+		return json;
 	}
 
 	/**
 	 * 根据角色id获取角色已有权限
 	 */
-	public void getPrivilegeByRoleId() {
+	@RequestMapping("getPrivilegeByRoleId")
+	@ResponseBody
+	public List<Role> getPrivilegeByRoleId(Role role) {
 		String hql = "select distinct res from Role r join r.resources res where r.id=:id";
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("id", model.getId());
-		List<Role> resource = roleService.find(hql, map);
-		writeJson(resource);
+		map.put("id", role.getId());
+		return roleService.find(hql, map);
 	}
 
 	/**
 	 * 修改角色权限
 	 */
-	public void doGrantPrivilege() {
+	@RequestMapping("doGrantPrivilege")
+	@ResponseBody
+	public ReturnJson doGrantPrivilege(Role r, String ids) {
 		ReturnJson json = new ReturnJson("修改失败");
 		try {
-			Role role = roleService.get(model.getId());
+			Role role = roleService.get(r.getId());
 			// 除去原有权限
 			role.setResources(new HashSet<Resource>());
 			for (String pid : ids.split(",")) {
@@ -114,23 +116,37 @@ public class RoleAction extends BaseAction<Role> {
 			json.setSuccess(true);
 		} catch (Exception e) {
 		}
-		writeJson(json);
+		return json;
 	}
 
-	public void update() {
+	@RequestMapping("update")
+	@ResponseBody
+	public ReturnJson update(Role r) {
 		ReturnJson json = new ReturnJson("删除失败");
 		try {
-			Role role = roleService.get(model.getId());
-			BeanUtils.copyProperties(model, role, new String[] { "createdatetime" });
+			Role role = roleService.get(r.getId());
+			BeanUtils.copyProperties(role, role, new String[] { "createdatetime" });
 			roleService.update(role);
 			json.setMsg("修改成功");
 			json.setSuccess(true);
 		} catch (Exception e) {
 		}
-		writeJson(json);
+		return json;
 	}
 
-	public String grantPrivilege(){
-		return "grantPrivilege";
+	@RequestMapping("/grantPrivilege")
+	public String grantPrivilege() {
+		return "/role/grantPrivilege";
 	}
+	
+	@RequestMapping("/editUI")
+	public String editUI(){
+		return "/role/editUI";
+	}
+	
+	@RequestMapping("/list")
+	public String list(){
+		return "/role/list";
+	}
+	
 }

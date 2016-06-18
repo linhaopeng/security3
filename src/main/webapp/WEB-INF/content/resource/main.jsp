@@ -18,7 +18,7 @@
 	$(function() {
 
 		mainMenu = $('#mainMenu').tree({
-			url : '${pageContext.request.contextPath}/resource/resourceAction!getTreeByUser.action',
+			url : '${pageContext.request.contextPath}/resource/getTreeByUser.action',
 			parentField : 'pid',
 			onClick : function(node) {
 				if (node.attributes.url) {
@@ -133,7 +133,7 @@
 </head>
 <body id="mainLayout" class="easyui-layout">
 	<!-- 上部分   -->
-	<div data-options="region:'north',href:'${pageContext.request.contextPath }/resource/resourceAction!north.action'" class="logo"></div>
+	<div data-options="region:'north',href:'${pageContext.request.contextPath }/resource/north.action'" class="logo"></div>
 	<!-- 左边导航栏 -->
 	<div data-options="region:'west',href:'',split:true" title="${userInfo.name },你好!" style="width: 200px; padding: 10px;">
 		<ul id="mainMenu"></ul>
@@ -149,7 +149,7 @@
 	</div>
 	
 	<!-- 底部声明    -->
-	<div data-options="region:'south',href:'${pageContext.request.contextPath }/resource/resourceAction!south.action',border:false" style="height: 30px; overflow: hidden;"></div>
+	<div data-options="region:'south',href:'${pageContext.request.contextPath }/resource/south.action',border:false" style="height: 30px; overflow: hidden;"></div>
 
 	<div id="loginDialog" title="解锁登录" style="display: none;">
 		<form method="post" class="form" onsubmit="return false;">

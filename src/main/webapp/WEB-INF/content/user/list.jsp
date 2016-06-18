@@ -9,7 +9,7 @@
 	var addFun = function() {
 		var dialog = parent.sy.modalDialog({
 			title : '添加用户信息',
-			url :  '${cxt}/user/userAction!editUI.action',
+			url :  '${cxt}/user/editUI.action',
 			buttons : [ {
 				text : '添加',
 				handler : function() {
@@ -21,13 +21,13 @@
 	var showFun = function(id) {
 		var dialog = parent.sy.modalDialog({
 			title : '查看用户信息',
-			url : '${cxt}/user/userAction!editUI.action?id=' + id
+			url : '${cxt}/user/editUI.action?id=' + id
 		});
 	};
 	var editFun = function(id) {
 		var dialog = parent.sy.modalDialog({
 			title : '编辑用户信息',
-			url : '${cxt}/user/userAction!editUI.action?id=' + id,
+			url : '${cxt}/user/editUI.action?id=' + id,
 			buttons : [ {
 				text : '编辑',
 				handler : function() {
@@ -39,7 +39,7 @@
 	var removeFun = function(id) {
 		parent.$.messager.confirm('询问', '您确定要删除此记录？', function(r) {
 			if (r) {
-				$.post('${cxt}/user/userAction!delete.action', {
+				$.post('${cxt}/user/delete.action', {
 					id : id
 				}, function() {
 					grid.datagrid('reload');
@@ -50,7 +50,7 @@
 	var grantRoleFun = function(id) {
 		var dialog = parent.sy.modalDialog({
 			title : '修改角色',
-			url : '${cxt}/user/userAction!grantRole.action?id=' + id,
+			url : '${cxt}/user/grantRole.action?id=' + id,
 			buttons : [ {
 				text : '修改',
 				handler : function() {
@@ -62,7 +62,7 @@
 	$(function() {
 		grid = $('#grid').datagrid({
 			title : '',
-			url :  '${cxt}/user/userAction!getList.action',
+			url :  '${cxt}/user/getList.action',
 			striped : true,//是否显示斑马线效果。
 			rownumbers : true, //左边显示序号
 			pagination : true, //是否分页

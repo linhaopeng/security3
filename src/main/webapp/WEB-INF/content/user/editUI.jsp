@@ -10,9 +10,9 @@
 	var submitNow = function($dialog, $grid, $pjq) {
 		var url;
 		if ($(':input[name="id"]').val().length > 0) {
-			url = '${cxt}/user/userAction!update.action';
+			url = '${cxt}/user/update.action';
 		} else {
-			url = '${cxt}/user/userAction!save.action';
+			url = '${cxt}/user/save.action';
 		}
 		$.post(url, sy.serializeObject($('form')), function(result) {
 			//parent.sy.progressBar('close');//关闭上传进度条
@@ -46,7 +46,7 @@
 			parent.$.messager.progress({
 				text : '数据加载中....'
 			});
-			$.post('${cxt}/user/userAction!getById.action', {
+			$.post('${cxt}/user/getById.action', {
 				id : $(':input[name="id"]').val()
 			}, function(result) {
 				if (result.id != undefined) {

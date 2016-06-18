@@ -10,7 +10,7 @@
 	var addFun = function() {
 		var dialog = parent.sy.modalDialog({
 			title : '添加资源信息',
-			url : '${cxt}/resource/resourceAction!editUI.action',
+			url : '${cxt}/resource/editUI.action',
 			buttons : [ {
 				text : '添加',
 				handler : function() {
@@ -22,13 +22,13 @@
 	var showFun = function(id) {
 		var dialog = parent.sy.modalDialog({
 			title : '查看资源信息',
-			url : '${cxt}/resource/resourceAction!editUI.action?id=' + id
+			url : '${cxt}/resource/editUI.action?id=' + id
 		});
 	};
 	var editFun = function(id) {
 		var dialog = parent.sy.modalDialog({
 			title : '编辑资源信息',
-			url : '${cxt}/resource/resourceAction!editUI.action?id=' + id,
+			url : '${cxt}/resource/editUI.action?id=' + id,
 			buttons : [ {
 				text : '编辑',
 				handler : function() {
@@ -40,7 +40,7 @@
 	var removeFun = function(id) {
 		parent.$.messager.confirm('询问', '您确定要删除此记录？', function(r) {
 			if (r) {
-				$.post('${cxt}/resource/resourceAction!delete.action', {
+				$.post('${cxt}/resource/delete.action', {
 					id : id
 				}, function() {
 					grid.treegrid('reload');
@@ -72,7 +72,7 @@
 	$(function() {
 		grid = $('#grid').treegrid({
 			title : '',
-			url : '${cxt}/resource/resourceAction!getResourceTree.action',
+			url : '${cxt}/resource/getResourceTree.action',
 			idField : 'id',
 			treeField : 'name',
 			parentField : 'pid',

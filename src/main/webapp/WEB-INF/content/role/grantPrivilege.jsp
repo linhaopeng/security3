@@ -12,7 +12,7 @@
 		for (var i = 0; i < nodes.length; i++) {
 			ids.push(nodes[i].id);
 		}
-		$.post('${cxt}/role/roleAction!doGrantPrivilege.action', {
+		$.post('${cxt}/role/doGrantPrivilege.action', {
 			id : $(':input[name="id"]').val(),
 			ids : ids.join(',')
 		}, function(result) {
@@ -29,14 +29,14 @@
 			text : '数据加载中....'
 		});
 		$('#tree').tree({
-			url : '${cxt}/resource/resourceAction!getResourceTree.action',
+			url : '${cxt}/resource/getResourceTree.action',
 			parentField : 'pid',
 			checkbox : true,
 			formatter : function(node) {
 				return node.name;
 			},
 			onLoadSuccess : function(node, data) {
-				$.post('${cxt}/role/roleAction!getPrivilegeByRoleId.action', {
+				$.post('${cxt}/role/getPrivilegeByRoleId.action', {
 					id : $(':input[name="id"]').val()
 				}, function(result) {
 					if (result) {

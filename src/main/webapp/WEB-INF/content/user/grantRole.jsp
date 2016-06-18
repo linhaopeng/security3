@@ -13,7 +13,7 @@
 		for (var i = 0; i < nodes.length; i++) {
 			ids.push(nodes[i].id);
 		}
-		$.post('${cxt}/user/userAction!doGrantRole.action', {
+		$.post('${cxt}/user/doGrantRole.action', {
 			id : $(':input[name="id"]').val(),
 			ids : ids.join(',')
 		}, function(result) {
@@ -30,7 +30,7 @@
 			text : '数据加载中....'
 		});
 		$('#tree').tree({
-			url : '${cxt}/user/userAction!getAllRole.action',
+			url : '${cxt}/user/getAllRole.action',
 			parentField : 'pid',
 			checkbox : true,
 			formatter : function(node) {
@@ -38,7 +38,7 @@
 			},
 			onLoadSuccess : function(node, data) {
 				//回显用户已有角色
-				$.post('${cxt}/user/userAction!getRoleByUserId.action', {
+				$.post('${cxt}/user/getRoleByUserId.action', {
 					id : $(':input[name="id"]').val()
 				}, function(result) {
 					if (result) {

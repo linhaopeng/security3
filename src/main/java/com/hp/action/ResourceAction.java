@@ -1,18 +1,19 @@
 package com.hp.action;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.struts2.ServletActionContext;
-import org.apache.struts2.convention.annotation.Action;
-import org.apache.struts2.convention.annotation.Namespace;
-import org.apache.struts2.convention.annotation.ParentPackage;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.hp.base.BaseAction;
 import com.hp.model.Resource;
 import com.hp.model.User;
 import com.hp.pageModel.ReturnJson;
@@ -20,18 +21,17 @@ import com.hp.pageModel.Tree;
 import com.hp.service.ResourceService;
 import com.hp.utils.ConfigUtil;
 
-@ParentPackage("basePackage")
-@Namespace("/resource")
-@Action(value = "resourceAction")
-public class ResourceAction extends BaseAction<Resource> {
-
-	private static final long serialVersionUID = -8298755088038382099L;
+@Controller
+@RequestMapping("/resource")
+public class ResourceAction extends BaseAction {
 
 	@Autowired
 	private ResourceService resourceService;
 
-	public void getTreeByUser() {
-		User sysUser = (User) ServletActionContext.getRequest().getSession().getAttribute(ConfigUtil.getSessionInfoName());
+	@RequestMapping("getTreeByUser")
+	@ResponseBody
+	public List<Tree> getTreeByUser(HttpServletRequest request) {
+		User sysUser = (User) request.getSession().getAttribute(ConfigUtil.getSessionInfoName());
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("id", 1);
 		params.put("userId", sysUser.getId());
@@ -50,10 +50,12 @@ public class ResourceAction extends BaseAction<Resource> {
 			node.setAttributes(attributes);
 			tree.add(node);
 		}
-		writeJson(tree);
+		return tree;
 	}
 
-	public void getTree() {
+	@RequestMapping("getTree")
+	@ResponseBody
+	public List<Tree> getTree() {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("id", 1);
 		List<Resource> resources = resourceService.find("from Resource s where s.resourcetype.id=:id", params);
@@ -70,56 +72,63 @@ public class ResourceAction extends BaseAction<Resource> {
 			node.setAttributes(attributes);
 			tree.add(node);
 		}
-		writeJson(tree);
+		return tree;
 	}
 
 	/**
 	 * 获取资源树
 	 */
-	public void getResourceTree() {
-		List<Resource> resources = resourceService.find("from Resource s left join fetch s.resourcetype");
-		writeJson(resources);
+	@RequestMapping("getResourceTree")
+	@ResponseBody
+	public List<Resource> getResourceTree() {
+//		return resourceService.find("from Resource s left join fetch s.resourcetype");
+		return  resourceService.getResourceTree();
 	}
-
+	
 	/**
 	 * 添加资源
 	 */
-	public void save() {
+	@RequestMapping("save")
+	@ResponseBody
+	public ReturnJson save(Resource resource) {
 		ReturnJson json = new ReturnJson("添加失败");
 		try {
-			resourceService.save(model);
+			resourceService.save(resource);
 			json.setMsg("添加成功");
 			json.setSuccess(true);
 		} catch (Exception e) {
 		}
-		writeJson(json);
+		return json;
 	}
 
 	/**
 	 * 根据id获取资源
 	 */
-	public void get() {
-		Resource Resource = resourceService.get(model.getId());
-		writeJson(Resource);
+	@RequestMapping("/get")
+	@ResponseBody
+	public Resource get(Resource resource) {
+		return resourceService.get(resource.getId());
 	}
 
 	/**
 	 * 根据id获取资源
 	 */
-	public void update() {
-		// Resource Resource = resourceService.get(model.getId());
+	@RequestMapping("/update")
+	@ResponseBody
+	public ReturnJson update(Resource resource) {
+		// Resource Resource = resourceService.get(resource.getId());
 		// writeJson(Resource);
 		ReturnJson json = new ReturnJson("修改失败");
-		if (model.getId() != 0) {
-			if (model.getResource() != null && model.getId() == model.getResource().getId()) {
+		if (resource.getId() != 0) {
+			if (resource.getResource() != null && resource.getId() == resource.getResource().getId()) {
 				json.setMsg("父资源不可以是自己！");
 			} else {
-				updateResource(model);
+				updateResource(resource);
 				json.setMsg("修改成功");
 				json.setSuccess(true);
 			}
 		}
-		writeJson(json);
+		return json;
 	}
 
 	private void updateResource(Resource resource) {
@@ -136,24 +145,40 @@ public class ResourceAction extends BaseAction<Resource> {
 		}
 	}
 	
-	public void delete(){
-		resourceService.delete(resourceService.get(model.getId()));
+	@RequestMapping("/delete")
+	@ResponseBody
+	public ReturnJson delete(Resource resource){
+		resourceService.delete(resourceService.get(resource.getId()));
 		ReturnJson result = new ReturnJson();
 		result.setMsg("删除成功");
 		result.setSuccess(true);
-		writeJson(result);
+		return result;
 	}
 	
-	//----------------------跳转----------------
-	
-	public String main(){
-		return "main";
-	}
-	public String south(){
-		return "south";
-	}
+	@RequestMapping("/north")
 	public String north(){
-		return "north";
+		return "/resource/north";
 	}
+	
+	@RequestMapping("/main")
+	public String main(){
+		return "/resource/main";
+	}
+	
+	@RequestMapping("/south")
+	public String south(){
+		return "/resource/south";
+	}
+	
+	@RequestMapping("/editUI")
+	public String editUI(){
+		return "/resource/editUI";
+	}
+	
+	@RequestMapping("/list")
+	public String list(){
+		return "/resource/list";
+	}
+	
 	
 }

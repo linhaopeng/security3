@@ -9,7 +9,7 @@
 	var addFun = function() {
 		var dialog = parent.sy.modalDialog({
 			title : '添加角色信息',
-			url :  '${cxt}/role/roleAction!editUI.action',
+			url :  '${cxt}/role/editUI.action',
 			buttons : [ {
 				text : '添加',
 				handler : function() {
@@ -21,13 +21,13 @@
 	var showFun = function(id) {
 		var dialog = parent.sy.modalDialog({
 			title : '查看用户信息',
-			url : '${cxt}/role/roleAction!editUI.action?id=' + id
+			url : '${cxt}/role/editUI.action?id=' + id
 		});
 	};
 	var editFun = function(id) {
 		var dialog = parent.sy.modalDialog({
 			title : '编辑用户信息',
-			url : '${cxt}/role/roleAction!editUI.action?id=' + id,
+			url : '${cxt}/role/editUI.action?id=' + id,
 			buttons : [ {
 				text : '编辑',
 				handler : function() {
@@ -39,7 +39,7 @@
 	var removeFun = function(id) {
 		parent.$.messager.confirm('询问', '您确定要删除此记录？', function(r) {
 			if (r) {
-				$.post('${cxt}/role/roleAction!delete.action', {
+				$.post('${cxt}/role/delete.action', {
 					id : id
 				}, function() {
 					grid.datagrid('reload');
@@ -50,7 +50,7 @@
 	var grantPrivilegeFun = function(id) {
 		var dialog = parent.sy.modalDialog({
 			title : '修改权限',
-			url : '${cxt}/role/roleAction!grantPrivilege.action?id=' + id,
+			url : '${cxt}/role/grantPrivilege.action?id=' + id,
 			buttons : [ {
 				text : '修改',
 				handler : function() {
@@ -62,7 +62,7 @@
 	$(function() {
 		grid = $('#grid').datagrid({
 			title : '',
-			url :  '${cxt}/role/roleAction!getList.action',
+			url :  '${cxt}/role/getList.action',
 			striped : true,//是否显示斑马线效果。
 			rownumbers : true, //左边显示序号
 			pagination : true, //是否分页

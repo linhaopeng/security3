@@ -10,9 +10,9 @@
 		if ($('form').form('validate')) {
 			var url;
 			if ($(':input[name="id"]').val().length > 0) {
-				url = '${cxt}/role/roleAction!update.action';
+				url = '${cxt}/role/update.action';
 			} else {
-				url = '${cxt}/role/roleAction!save.action';
+				url = '${cxt}/role/save.action';
 			}
 			$.post(url, sy.serializeObject($('form')), function(result) {
 				if (result.success) {
@@ -29,7 +29,7 @@
 			parent.$.messager.progress({
 				text : '数据加载中....'
 			});
-			$.post('${cxt}/role/roleAction!getById.action', {
+			$.post('${cxt}/role/getById.action', {
 				id : $(':input[name="id"]').val()
 			}, function(result) {
 				if (result.id != undefined) {

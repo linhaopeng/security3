@@ -10,9 +10,9 @@
 		if ($('form').form('validate')) {
 			var url;
 			if ($(':input[name="id"]').val().length > 0) {
-				url = '${cxt}/resource/resourceAction!update.action';
+				url = '${cxt}/resource/update.action';
 			} else {
-				url = '${cxt}/resource/resourceAction!save.action';
+				url = '${cxt}/resource/save.action';
 			}
 			$.post(url, sy.serializeObject($('form')), function(result) {
 				if (result.success) {
@@ -42,7 +42,7 @@
 			parent.$.messager.progress({
 				text : '数据加载中....'
 			}); 
-			$.post('${cxt}/resource/resourceAction!get.action', 
+			$.post('${cxt}/resource/get.action', 
 				{
 					id : $(':input[name="id"]').val()
 				}, 
@@ -82,11 +82,11 @@
 					<th>资源路径</th>
 					<td><input name="url" /></td>
 					<th>资源类型</th>
-					<td><select name="resourcetype.id" class="easyui-combobox" data-options="required:true,editable:false,valueField:'id',textField:'name',url:'${cxt }/resourceType/resourceTypeAction!getResourcetypeList.action',panelHeight:'auto'" style="width: 155px;"></select></td>
+					<td><select name="resourcetype.id" class="easyui-combobox" data-options="required:true,editable:false,valueField:'id',textField:'name',url:'${cxt }/resourceType/getResourcetypeList.action',panelHeight:'auto'" style="width: 155px;"></select></td>
 				</tr>
 				<tr>
 					<th>上级资源</th>
-					<td><select id="resource_id" name="resource.id" class="easyui-combotree" data-options="editable:false,idField:'id',textField:'text',parentField:'pid',url:'${cxt }/resource/resourceAction!getTree.action'" style="width: 155px;"></select><img class="iconImg icon-remove" onclick="$('#resource_id').combotree('clear');" title="清空" /></td>
+					<td><select id="resource_id" name="resource.id" class="easyui-combotree" data-options="editable:false,idField:'id',textField:'text',parentField:'pid',url:'${cxt }/resource/getTree.action'" style="width: 155px;"></select><img class="iconImg icon-remove" onclick="$('#resource_id').combotree('clear');" title="清空" /></td>
 					<th>资源图标</th>
 					<td><input id="iconCls" name="iconCls" readonly="readonly" style="padding-left: 18px; width: 134px;" /><!-- <img class="iconImg ext-icon-zoom" onclick="showIcons();" title="浏览图标" />&nbsp;<img class="iconImg ext-icon-cross" onclick="$('#iconCls').val('');$('#iconCls').attr('class','');" title="清空" /> --></td>
 				</tr>
