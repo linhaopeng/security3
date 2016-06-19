@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
-	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
-
-	<!-- 加载spring配置文件 -->
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5">
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath*:spring.xml,classpath*:spring-*.xml</param-value>
 	</context-param>
-
-	<!-- 添加spring监听器 -->
+	
+	<!-- spring监听器 -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+	
 	<!-- 防止spring内存溢出监听器 -->
 	<listener>
 		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
 	</listener>
-
+	
 	<!-- 添加 spring-security : springSecurityFilterChain 过滤链 -->
 	<filter>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
 	</filter>
-	
 	<filter-mapping>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>*.action</url-pattern>
@@ -36,7 +36,6 @@
 		<url-pattern>/j_spring_security_logout</url-pattern>
 	</filter-mapping>
 	
-	
 	<!-- 配置字符集过滤器 -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>
@@ -46,7 +45,6 @@
 			<param-value>UTF-8</param-value>
 		</init-param>
 	</filter>
-	<!-- 配置项目的编码mapping -->
 	<filter-mapping>
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>*.action</url-pattern>
@@ -84,13 +82,9 @@
 	<listener>
 		<listener-class>com.hp.listener.UserHttpSessionAttributeListener</listener-class>
 	</listener>
-	
-	<!-- javamelody监听器 -->
 	<listener>
 		<listener-class>net.bull.javamelody.SessionListener</listener-class>
 	</listener>
-	
-	<!-- druid监控页面，使用${pageContext.request.contextPath}/druid/index.html访问 -->
 	<servlet>
 		<servlet-name>druidStatView</servlet-name>
 		<servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>
@@ -109,12 +103,11 @@
 			<param-value>true</param-value>
 		</init-param>
 	</filter>
-	
 	<filter-mapping>
 		<filter-name>openSessionInView</filter-name>
 		<url-pattern>*.action</url-pattern>
 	</filter-mapping>
-
+	
 	<!-- 配置spring mvc -->
 	<servlet>
 		<servlet-name>springMvc</servlet-name>
@@ -131,8 +124,6 @@
 		<servlet-name>springMvc</servlet-name>
 		<url-pattern>*.action</url-pattern>
 	</servlet-mapping>
-
-
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
